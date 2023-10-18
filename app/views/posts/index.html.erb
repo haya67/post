@@ -44,4 +44,7 @@
   </tbody>
 </table>
 
+<p>予定合計<%= @posts_total %></p>
+<p>本日の日付 <%= Time.now.strftime("%Y/%m/%d")%></p>
+
 <p><%= link_to "スケジュール新規登録", :new_post %></p>

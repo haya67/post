@@ -2,6 +2,7 @@ class Post < ApplicationRecord
     validate :start_end_check
     validates :title, presence: true
     validates :title, length: { maximum: 20 }
+    validates :content, length: {maximum: 500}
     
     def start_end_check
         if self.finish < self.start

@@ -1,5 +1,9 @@
 <h3>スケジュール新規作成</h3>
 
+<% if flash.now[:alert] %>
+  <p class="notice"><%= flash.now[:alert] %></p>
+<% end %>
+
 <%= form_with model: @posts do |f| %>
   <table>
     <tr>

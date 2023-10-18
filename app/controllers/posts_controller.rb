@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
+    @posts_total = @posts.count
   end
 
   def new
@@ -13,8 +14,8 @@ class PostsController < ApplicationController
       flash[:notice] = "予定を新規登録しました"
       redirect_to :posts
     else
-      flash[:alert] = "予定の登録に失敗しました。"
-      render "new"
+      flash.now[:alert] = "予定の登録に失敗しました。"
+      render :new, status: :unprocessable_entity
     end
   end
 
