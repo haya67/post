@@ -1,0 +1,50 @@
+<h2>予定一覧</h2>
+
+<% if flash[:notice] %>
+<p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>タイトル</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>終日</th>
+      <th>スケジュール更新日時</th>
+      <th>確認</th>
+      <th>編集</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.id %></td>
+        <td><%= post.title %></td>
+        <td><%= post.start %></td>
+        <td><%= post.finish %></td>
+        <td><% if post.all_day == "1" %>
+          ○
+        <% end %></td>
+        <td><%= post.created_at.to_s(:datetime_jp) %></td>
+        <td>
+          <%= link_to"確認",  post_path(post.id), method: :get %>
+        </td>
+        <td>   
+          <%= link_to"編集",  edit_post_path(post.id), method: :get %>
+        </td>
+        <td>   
+          <%= link_to"削除",  post_path(post.id), method: :delete, data: { confirm:"本当に削除しますか?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>予定合計<%= @posts_total %></p>
+<p>本日の日付 <%= Time.now.strftime("%Y/%m/%d")%></p>
+
+<p><%= link_to "スケジュール新規登録", :new_post %></p>
